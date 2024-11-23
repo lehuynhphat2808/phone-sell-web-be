@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nha Trang Seafood - API Documentation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    h1,
+    h2,
+    h3 {
+      color: #2c3e50;
+    }
+
+    pre {
+      background-color: #f4f4f4;
+      padding: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Nha Trang Seafood - API Documentation</h1>
+
+  <p>Chào mừng đến với API của Nha Trang Seafood. API này cung cấp quyền truy cập vào các tính năng khác nhau của nền tảng thương mại điện tử hải sản của chúng tôi.</p>
+
+  <h2>URL Cơ sở</h2>
+  <p>Tất cả các yêu cầu API nên được gửi đến: <code>https://www.nhatrangseafood.com/api/v1</code></p>
+
+  <h2>Xác thực</h2>
+  <p>Hầu hết các endpoint yêu cầu xác thực. Bao gồm token JWT của bạn trong header của mỗi yêu cầu:</p>
+  <pre>Authorization: Bearer YOUR_JWT_TOKEN</pre>
+
+  <h2>Endpoints</h2>
+
+  <h3>Người dùng</h3>
+  <ul>
+    <li>GET /users - Lấy danh sách người dùng (chỉ admin)</li>
+    <li>GET /users/:id - Lấy thông tin người dùng cụ thể</li>
+    <li>POST /users - Đăng ký người dùng mới</li>
+    <li>PUT /users/:id - Cập nhật thông tin người dùng</li>
+    <li>DELETE /users/:id - Xóa người dùng (chỉ admin)</li>
+    <li>PUT /users/:id/reward-points - Cập nhật điểm thưởng (chỉ admin)</li>
+    <li>POST /users/:id/orders - Thêm đơn hàng cho người dùng</li>
+    <li>POST /users/login - Đăng nhập</li>
+    <li>GET /users/auth/google - Đăng nhập bằng Google</li>
+    <li>GET /users/auth/facebook - Đăng nhập bằng Facebook</li>
+    <li>POST /users/delete-data - Yêu cầu xóa dữ liệu người dùng</li>
+  </ul>
+
+  <h3>Sản phẩm</h3>
+  <ul>
+    <li>GET /products - Lấy danh sách sản phẩm</li>
+    <li>GET /products/search - Tìm kiếm sản phẩm</li>
+    <li>GET /products/:id - Lấy thông tin sản phẩm cụ thể</li>
+    <li>POST /products - Thêm sản phẩm mới (chỉ admin)</li>
+    <li>PUT /products/:id - Cập nhật sản phẩm (chỉ admin)</li>
+    <li>DELETE /products/:id - Xóa sản phẩm (chỉ admin)</li>
+  </ul>
+
+  <h3>Đơn hàng</h3>
+  <ul>
+    <li>GET /orders - Lấy danh sách đơn hàng (chỉ admin)</li>
+    <li>GET /orders/:id - Lấy thông tin đơn hàng cụ thể</li>
+    <li>POST /orders - Tạo đơn hàng mới</li>
+    <li>PUT /orders/:id - Cập nhật đơn hàng (chỉ admin)</li>
+    <li>DELETE /orders/:id - Xóa đơn hàng (chỉ admin)</li>
+    <li>GET /orders/user/:userId - Lấy đơn hàng theo user ID</li>
+  </ul>
+
+  <h3>Giỏ hàng</h3>
+  <ul>
+    <li>GET /carts - Lấy danh sách giỏ hàng</li>
+    <li>GET /carts/:id - Lấy thông tin giỏ hàng cụ thể</li>
+    <li>POST /carts - Tạo giỏ hàng mới</li>
+    <li>PUT /carts/:id - Cập nhật giỏ hàng</li>
+    <li>DELETE /carts/:id - Xóa giỏ hàng</li>
+    <li>GET /carts/user/:userId - Lấy giỏ hàng theo user ID</li>
+  </ul>
+
+  <h3>Voucher</h3>
+  <ul>
+    <li>GET /vouchers - Lấy danh sách voucher</li>
+    <li>GET /vouchers/:id - Lấy thông tin voucher cụ thể</li>
+    <li>POST /vouchers - Tạo voucher mới (chỉ admin)</li>
+    <li>PUT /vouchers/:id - Cập nhật voucher (chỉ admin)</li>
+    <li>DELETE /vouchers/:id - Xóa voucher (chỉ admin)</li>
+  </ul>
+
+  <h3>Khác</h3>
+  <ul>
+    <li>GET /privacy-policy - Xem chính sách quyền riêng tư</li>
+    <li>GET /terms-of-service - Xem điều khoản dịch vụ</li>
+    <li>GET /data-deletion-instructions - Xem hướng dẫn xóa dữ liệu</li>
+  </ul>
+
+  <h2>Định dạng Phản hồi</h2>
+  <p>Tất cả các phản hồi được trả về dưới dạng JSON. Một phản hồi điển hình có dạng như sau:</p>
+  <pre>
+{
+  "success": true,
+  "data": {
+    // Dữ liệu phản hồi ở đây
+  },
+  "message": "Thao tác thành công"
+}
+  </pre>
+
+  <h2>Xử lý Lỗi</h2>
+  <p>Trong trường hợp xảy ra lỗi, phản hồi sẽ bao gồm thông báo lỗi và mã trạng thái HTTP thích hợp:</p>
+  <pre>
+{
+  "success": false,
+  "error": "Thông báo lỗi ở đây",
+  "status": 400
+}
+  </pre>
+
+  <h2>Giới hạn Tốc độ</h2>
+  <p>Các cuộc gọi API được giới hạn ở 100 yêu cầu mỗi giờ cho mỗi API key. Nếu bạn vượt quá giới hạn này, bạn sẽ nhận được phản hồi 429 Too Many Requests.</p>
+
+  <h2>Hỗ trợ</h2>
+  <p>Nếu bạn cần hỗ trợ hoặc có câu hỏi về API, vui lòng liên hệ với đội ngũ hỗ trợ của chúng tôi tại api-support@nhatrangseafood.com.</p>
+
+  <h2>Điều khoản Dịch vụ</h2>
+  <p>Bằng cách sử dụng API này, bạn đồng ý với <a href="/terms-of-service">Điều khoản Dịch vụ</a> của chúng tôi.</p>
+
+  <h2>Chính sách Quyền riêng tư</h2>
+  <p>Để biết thông tin về cách chúng tôi xử lý dữ liệu của bạn, vui lòng tham khảo <a href="/privacy-policy">Chính sách Quyền riêng tư</a> của chúng tôi.</p>
+</body>
+
+</html>
